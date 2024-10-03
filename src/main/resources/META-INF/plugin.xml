@@ -1,0 +1,43 @@
+<idea-plugin>
+  <id>dev.ja.localize.demo</id>
+  <name>Localization!</name>
+  <vendor url="https://www.j-a.dev">Joachim Ansorg</vendor>
+
+  <description><![CDATA[
+   Demo how to localize a JetBrains IDEA plugin.
+  ]]></description>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <!-- the main bundle used by the plugin -->
+  <resource-bundle>messages.LocalizeBundle</resource-bundle>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <localInspection shortName="localizeDemo"
+                     level="INFO"
+                     implementationClass="dev.ja.localize.inspections.DemoInspection"
+                     language="XML"
+                     enabledByDefault="true"
+                     groupKey="inspection.group.demo"
+                     groupPathKey="inspection.groupPath.demo"
+                     key="inspection.demo.displayName"/>
+  </extensions>
+
+  <actions>
+    <action text="Localize: Bad Action" class="dev.ja.localize.actions.BadAction"/>
+    <action text="Localize: Show Bad Dialog" class="dev.ja.localize.actions.ShowBadDialogAction"/>
+
+    <action id="showGoodDialog" class="dev.ja.localize.actions.ShowGoodDialogAction"/>
+
+    <action id="goodAction" class="dev.ja.localize.actions.GoodAction" icon="AllIcons.Actions.Checked">
+      <override-text place="MainMenu"/>
+      <synonym key="action.goodAction.synonymOne"/>
+    </action>
+
+    <group id="goodGroup" popup="true">
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+
+      <reference id="goodAction"/>
+    </group>
+  </actions>
+</idea-plugin>
